@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -24,4 +25,7 @@ public class ObligationType {
     @ManyToOne // Foreign key
     @JoinColumn(name = "type_id", nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_OBLIGATION_TYPE"))
     private Catalogue type;
+
+    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Obligation> obligations;
 }

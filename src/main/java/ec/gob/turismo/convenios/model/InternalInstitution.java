@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -39,4 +40,10 @@ public class InternalInstitution {
     @ManyToOne
     @JoinColumn(name = "agreement_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT"))
     private Agreement agreement;
+
+    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InstitutionObligation> institutionObligations;
+
+    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Financing> financings;
 }
