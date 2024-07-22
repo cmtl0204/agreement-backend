@@ -23,8 +23,7 @@ public class CatalogueServiceImpl extends CRUDImpl<Catalogue, UUID> implements I
     }
 
 
-    @Override
-    public List<Catalogue> findCatalogueChildless() {
-        return repo.findCatalogueChildless();
+    public List<Catalogue> findCatalogue() {
+        return repo.findCatalogue();
     }
 }

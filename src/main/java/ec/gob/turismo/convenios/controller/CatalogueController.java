@@ -26,7 +26,7 @@ public class CatalogueController {
 
     @GetMapping
     public ResponseEntity<List<CatalogueDTO>> findAll() {
-        List<CatalogueDTO> list = service.findCatalogueChildless().stream().map(this::convertToDto).toList();
+        List<CatalogueDTO> list = service.findCatalogue().stream().map(this::convertToDto).toList();
         return ResponseEntity.ok(list);
     }
 
