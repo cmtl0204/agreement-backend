@@ -32,7 +32,7 @@ public class ExternalInstitution {
     private String unit;
 
     @ManyToOne
-    @JoinColumn(name = "agreement_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT_EXTERNAL_INSTITUTION"))
+    @JoinColumn(name = "agreement_id",  foreignKey = @ForeignKey(name = "FK_AGREEMENT_EXTERNAL_INSTITUTION"))
     private Agreement agreement;
 
     @ManyToOne

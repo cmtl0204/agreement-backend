@@ -1,13 +1,17 @@
 package ec.gob.turismo.convenios.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -21,6 +25,7 @@ public class Agreement {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.UUID)
+    //@UuidGenerator(style = UuidGenerator.Style.RANDOM)
     private UUID id;
 
     @Column(length = 255, nullable = false)
@@ -35,7 +40,7 @@ public class Agreement {
 
     private LocalDateTime startedAt;
 
-    private boolean isFinishDate;
+    private Boolean isFinishDate;
 
     private LocalDateTime endedAt;
 
@@ -53,6 +58,8 @@ public class Agreement {
 
     private boolean isAddendum;
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean enable;
 
     @ManyToOne
     @JoinColumn(name = "origin_id", nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_ORIGIN_AGREEMENT"))
@@ -63,7 +70,11 @@ public class Agreement {
     private Catalogue type;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_USER_AGREEMENT"))
+    @JoinColumn(name = "special_type_id", foreignKey = @ForeignKey(name = "FK_CATALOGUE_SPECIAL_TYPE_AGREEMENT"))
+    private Catalogue specialType;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true, foreignKey = @ForeignKey(name = "FK_USER_AGREEMENT"))
     private User user;
 
     @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -79,6 +90,6 @@ public class Agreement {
     private List<Financing> financings;
 
     @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InternalInstitution> internalInstitutions;
+    private Set<InternalInstitution> internalInstitutions = new HashSet<>();
 
 }

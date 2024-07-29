@@ -1,10 +1,12 @@
 package ec.gob.turismo.convenios.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +22,7 @@ public class InternalInstitution {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.UUID)
+    //@UuidGenerator(style = UuidGenerator.Style.RANDOM)
     private UUID id;
 
     @Column(length = 255, nullable = false)
@@ -38,7 +41,7 @@ public class InternalInstitution {
     private Catalogue personType;
 
     @ManyToOne
-    @JoinColumn(name = "agreement_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT"))
+    @JoinColumn(name = "agreement_id", nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT"))
     private Agreement agreement;
 
     @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
