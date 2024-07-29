@@ -51,6 +51,4 @@ public class Catalogue {
 
     private boolean required;
 
-    //@Transient
-    //private List<Catalogue> children;
 }

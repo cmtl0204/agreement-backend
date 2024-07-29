@@ -34,7 +34,4 @@ public class CatalogueDTO {
     private String type;
 
     private boolean required;
-
-   private List<Catalogue> children;
-
 }

@@ -7,6 +7,6 @@ import java.util.UUID;
 
 public interface ICatalogueService extends ICRUD<Catalogue, UUID> {
 
-    List<Catalogue> findCatalogueChildless();
+    List<Catalogue> findCatalogue();
 
 }

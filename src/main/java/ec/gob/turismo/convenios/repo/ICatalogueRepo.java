@@ -10,6 +10,6 @@ import java.util.UUID;
 
 public interface ICatalogueRepo<T, ID> extends IGenericRepo<Catalogue, UUID> {
 
-    @Query("FROM Catalogue c WHERE c.parent is null ORDER BY c.sort")
-    List<Catalogue> findCatalogueChildless();
+    @Query("FROM Catalogue c ORDER BY c.type, c.sort")
+    List<Catalogue> findCatalogue();
 }
