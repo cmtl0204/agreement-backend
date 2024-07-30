@@ -2,6 +2,7 @@ package ec.gob.turismo.convenios.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import ec.gob.turismo.convenios.model.Agreement;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,21 +16,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ExternalInstitutionDTO {
+public class ObligationDetailDTO {
 
     @EqualsAndHashCode.Include
     private UUID id;
 
-    @NotNull
-    private String name;
-
-    @NotNull
-    private CatalogueDTO personType;
+   @NotNull
+   private String description;
 
     @JsonBackReference
-    private AgreementDTO agreement;
-
-    @JsonManagedReference
-    private List<ExternalInstitutionDetailDTO> externalInstitutionDetails;
-
+    private ObligationDTO obligation;
 }

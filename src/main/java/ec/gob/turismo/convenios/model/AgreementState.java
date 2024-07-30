@@ -33,6 +33,6 @@ public class AgreementState {
     private Catalogue state;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_USER_AGREEMENT_STATE"))
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER_AGREEMENT_STATE"))
     private User user;
 }

@@ -1,5 +1,6 @@
 package ec.gob.turismo.convenios.controller;
 
+import ec.gob.turismo.convenios.dto.AdministratorDTO;
 import ec.gob.turismo.convenios.dto.AgreementDTO;
 import ec.gob.turismo.convenios.model.*;
 import ec.gob.turismo.convenios.service.IAgreementService;
@@ -40,27 +41,20 @@ public class AgreementController {
 
     @PostMapping
     public ResponseEntity<AgreementDTO> save(@Valid @RequestBody AgreementDTO dto) {
-        List<InternalInstitution> internal = mapper.map(dto.getInternalInstitutions(), new TypeToken<List<InternalInstitution>>(){}.getType());
-        List<ExternalInstitution> external = mapper.map(dto.getExternalInstitutions(), new TypeToken<List<ExternalInstitution>>(){}.getType());
-        Agreement obj = service.createAgreement(mapperUtil.map(dto, Agreement.class, "defaultMapper"),
-                mapperUtil.map(dto.getAdministrator(), Administrator.class, "defaultMapper"),
-                mapperUtil.map(dto.getAgreementState(), AgreementState.class, "defaultMapper"),
-                internal,
-                external);
-        Agreement agreement = service.findById(obj.getId());
-        System.out.println(agreement.toString());
-        return ResponseEntity.ok(mapperUtil.map(agreement, AgreementDTO.class,"defaultMapper"));
+        Agreement agreement = mapperUtil.map(dto, Agreement.class);
+        Agreement obj = service.createAgreement(agreement);
+
+        return ResponseEntity.ok(mapperUtil.map(obj, AgreementDTO.class));
     }
 
 
-   /* private CatalogueDTO convertToDto(Catalogue obj) {
-        return mapper.map(obj, CatalogueDTO.class);
+    private AdministratorDTO convertToDto(AdministratorDTO obj) {
+        return mapper.map(obj, AdministratorDTO.class);
     }
 
-    private Catalogue convertToEntity(CatalogueDTO dto) {
-
-        return mapper.map(dto, Catalogue.class);
-    }*/
+    private Administrator convertToEntity(AdministratorDTO dto) {
+        return mapper.map(dto, Administrator.class);
+    }
 
 
 }

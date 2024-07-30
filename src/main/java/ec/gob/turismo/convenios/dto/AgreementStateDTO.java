@@ -1,5 +1,6 @@
 package ec.gob.turismo.convenios.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import ec.gob.turismo.convenios.model.Catalogue;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -25,4 +26,7 @@ public class AgreementStateDTO {
     @NotNull
     private Catalogue state;
 
- }
+    @JsonBackReference
+    private AgreementDTO agreement;
+
+}

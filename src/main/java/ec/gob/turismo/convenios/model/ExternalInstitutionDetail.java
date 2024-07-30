@@ -14,20 +14,21 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "instituion_obligations")
-public class InstitutionObligation {
+@Table(name = "external_institution_details")
+public class ExternalInstitutionDetail {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private UUID modelId;
+    @Column(length = 255)
+    private String position;
+
+    @Column(length = 255)
+    private String unit;
 
     @ManyToOne
-    @JoinColumn(name = "obligation_type_id", nullable = false, foreignKey = @ForeignKey(name = "FK_OBLIGATION_TYPE_INSTITUTION_OBLIGATION"))
-    private ObligationType obligationType;
-
-    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Obligation> obligations;
+    @JoinColumn(name = "external_institution_id", nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT"))
+    private ExternalInstitution externalInstitution;
 }

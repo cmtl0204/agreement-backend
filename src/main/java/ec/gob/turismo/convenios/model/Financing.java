@@ -21,11 +21,12 @@ public class Financing {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private UUID modelId;
+    @Column(nullable = false)
+    private String institutionName;
 
     private double budget;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String paymentMethod;
 
     @Column(length = 255, nullable = false)

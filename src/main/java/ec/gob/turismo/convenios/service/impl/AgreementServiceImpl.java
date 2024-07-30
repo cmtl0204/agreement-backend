@@ -29,51 +29,21 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
         return agreementRepo;
     }
 
-//    protected IGenericRepo<Administrator, UUID> getRepo() {
-//
-//        return administratorRepo;
-//    }
-//
-//    protected IGenericRepo<InternalInstitution, UUID> getRepo() {
-//
-//        return internalInstitutionRepo;
-//    }
-//
-//    protected IGenericRepo<ExternalInstitution, UUID> getRepo() {
-//
-//        return externalInstitutionRepo;
-//    }
-
     @Transactional
     @Override
-    public Agreement createAgreement(Agreement agreement, Administrator administrator,
-                                     AgreementState agreementState,
-                                     List<InternalInstitution> internalInstitutions,
-                                     List<ExternalInstitution> externalInstitutions) {
-        //agreement.setInternalInstitutions(new ArrayList<>());
-        agreement.setExternalInstitutions(new ArrayList<>());
+    public Agreement createAgreement(Agreement agreement) {
 
         agreementRepo.save(agreement);
 
-//        administrator.setAgreement(agreement);
-//
-//        administratorRepo.save(administrator);
-//
-//        agreementState.setAgreement(agreement);
-//
-//        agreementStateRepo.save(agreementState);
+        Administrator administrator = agreement.getAdministrator();
+        administrator.setAgreement(agreement);
+        administratorRepo.save(administrator);
 
-//        internalInstitutions.forEach(internal -> {
-//            internal.setAgreement(agreement);
-//            internalInstitutionRepo.save(internal);
-//        });
+        AgreementState agreementState = agreement.getAgreementState();
+        agreementState.setAgreement(agreement);
+        agreementStateRepo.save(agreementState);
 
-//        externalInstitutions.forEach(external -> {
-//            external.setAgreement(agreement);
-//            externalInstitutionRepo.save(external);
-//        });
         return agreement;
     }
-
 
 }

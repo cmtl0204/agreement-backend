@@ -1,20 +1,15 @@
 package ec.gob.turismo.convenios.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UuidGenerator;
+import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
-@Data
+//@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -58,9 +53,6 @@ public class Agreement {
 
     private boolean isAddendum;
 
-    @Column(columnDefinition = "boolean default false")
-    private boolean enable;
-
     @ManyToOne
     @JoinColumn(name = "origin_id", nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_ORIGIN_AGREEMENT"))
     private Catalogue origin;
@@ -80,16 +72,27 @@ public class Agreement {
     @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Administrator> administrators;
 
+    @Transient
+    private Administrator administrator;
+
     @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AgreementState> agreementStates;
+
+    @Transient
+    private AgreementState agreementState;
+
+    @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InternalInstitution> internalInstitutions;
 
     @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExternalInstitution> externalInstitutions;
 
     @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Financing> financings;
+    private List<Obligation> obligations;
 
     @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<InternalInstitution> internalInstitutions = new HashSet<>();
+    private List<Financing> financings;
+
+
 
 }

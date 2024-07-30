@@ -15,21 +15,24 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ExternalInstitutionDTO {
+public class FinancingDTO {
 
     @EqualsAndHashCode.Include
     private UUID id;
 
-    @NotNull
-    private String name;
+   @NotNull
+   private String institutionName;
 
-    @NotNull
-    private CatalogueDTO personType;
+   @NotNull
+   private double budget;
+
+   @NotNull
+   private String paymentMethod;
+
+   @NotNull
+   private String source;
 
     @JsonBackReference
     private AgreementDTO agreement;
-
-    @JsonManagedReference
-    private List<ExternalInstitutionDetailDTO> externalInstitutionDetails;
 
 }

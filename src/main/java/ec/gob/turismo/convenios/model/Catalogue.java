@@ -31,7 +31,7 @@ public class Catalogue {
     private Catalogue parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    //@JsonIgnore
     private List<Catalogue> children;
 
 

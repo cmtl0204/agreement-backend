@@ -8,10 +8,6 @@ import java.util.UUID;
 public interface IAgreementService extends ICRUD<Agreement, UUID> {
 
 
-    Agreement createAgreement(Agreement agreement, Administrator administrator,
-                              AgreementState agreementState,
-                              List<InternalInstitution> internalInstitutions,
-                              List<ExternalInstitution> externalInstitutions);
-
+    Agreement createAgreement(Agreement agreement);
 
 }

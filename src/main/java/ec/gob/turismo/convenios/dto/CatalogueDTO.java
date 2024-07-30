@@ -21,7 +21,7 @@ public class CatalogueDTO {
 
     private boolean enabled;
 
-    private Catalogue parent;
+    private CatalogueDTO parent;
 
     private String code;
 

@@ -65,16 +65,27 @@ public class AgreementDTO {
     private CatalogueDTO specialType;
 
     @NotNull
+    @JsonManagedReference
     private AdministratorDTO administrator;
 
     @NotNull
+    @JsonManagedReference
     private AgreementStateDTO agreementState;
 
     @NotNull
     @JsonManagedReference
-    private Set<InternalInstitutionDTO> internalInstitutions;
+    private List<InternalInstitutionDTO> internalInstitutions;
 
     @NotNull
+    @JsonManagedReference
     private List<ExternalInstitutionDTO> externalInstitutions;
+
+    @NotNull
+    @JsonManagedReference
+    private List<ObligationDTO> obligations;
+
+    @NotNull
+    @JsonManagedReference
+    private List<FinancingDTO> financings;
 
 }

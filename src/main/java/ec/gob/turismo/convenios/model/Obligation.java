@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -21,8 +22,16 @@ public class Obligation {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(length = 255, nullable = false)
-    private String description;
+    private String institutionName;
 
-    private UUID modelId;
+    @ManyToOne
+    @JoinColumn(name = "agreement_id", nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT"))
+    private Agreement agreement;
+
+    @ManyToOne // Foreign key
+    @JoinColumn(name = "type_id", nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_OBLIGATION_TYPE"))
+    private Catalogue type;
+
+    @OneToMany(mappedBy = "obligation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ObligationDetail> obligationDetails;
 }
