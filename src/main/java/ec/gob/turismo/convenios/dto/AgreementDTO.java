@@ -65,12 +65,19 @@ public class AgreementDTO {
     private CatalogueDTO specialType;
 
     @NotNull
+    private Boolean isFinancing;
+
+    @NotNull
     @JsonManagedReference
     private AdministratorDTO administrator;
+
+    private List<AdministratorDTO> administrators;
 
     @NotNull
     @JsonManagedReference
     private AgreementStateDTO agreementState;
+
+    private List<AgreementStateDTO> agreementStates;
 
     @NotNull
     @JsonManagedReference
@@ -84,7 +91,6 @@ public class AgreementDTO {
     @JsonManagedReference
     private List<ObligationDTO> obligations;
 
-    @NotNull
     @JsonManagedReference
     private List<FinancingDTO> financings;
 

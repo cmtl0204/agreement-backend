@@ -30,4 +30,4 @@ public class AdministratorDTO {
     @JsonBackReference
     private AgreementDTO agreement;
 
-}
+ }

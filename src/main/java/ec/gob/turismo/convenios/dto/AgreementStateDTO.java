@@ -24,7 +24,8 @@ public class AgreementStateDTO {
     private LocalDateTime registeredAt;
 
     @NotNull
-    private Catalogue state;
+    private CatalogueDTO state;
+
 
     @JsonBackReference
     private AgreementDTO agreement;

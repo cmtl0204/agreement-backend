@@ -22,13 +22,14 @@ public class Obligation {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
     private String institutionName;
 
     @ManyToOne
     @JoinColumn(name = "agreement_id", nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT"))
     private Agreement agreement;
 
-    @ManyToOne // Foreign key
+    @ManyToOne
     @JoinColumn(name = "type_id", nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_OBLIGATION_TYPE"))
     private Catalogue type;
 

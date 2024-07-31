@@ -3,6 +3,7 @@ package ec.gob.turismo.convenios.service.impl;
 import ec.gob.turismo.convenios.model.*;
 import ec.gob.turismo.convenios.repo.*;
 import ec.gob.turismo.convenios.service.IAgreementService;
+import ec.gob.turismo.convenios.util.CatalogueEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +45,20 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
         agreementStateRepo.save(agreementState);
 
         return agreement;
+    }
+
+    @Override
+    public List<Agreement> findNationalAgreementsByOrigin() {
+        String type = CatalogueEnum.CatalogueType.AGREEMENTS_ORIGIN.toString();
+        String code = CatalogueEnum.AgreementOrigin.NATIONAL.toString();
+        return agreementRepo.findNationalAgreementsByOrigin(type, code);
+    }
+
+    @Override
+    public List<Agreement> find() {
+        String type = CatalogueEnum.CatalogueType.AGREEMENTS_ORIGIN.toString();
+        String code = CatalogueEnum.AgreementOrigin.NATIONAL.toString();
+        return agreementRepo.find(type, code);
     }
 
 }

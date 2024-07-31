@@ -23,7 +23,7 @@ public class InternalInstitution {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @ManyToOne
