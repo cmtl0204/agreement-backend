@@ -103,18 +103,18 @@ public class Agreement {
     private List<Financing> financings;
 
     public Administrator getAdministrator() {
-        return administrators.getFirst();
+        return administrators.stream().filter(Administrator::isEnable).findFirst().orElse(null);
     }
 
     public void setAdministrator(Administrator administrator) {
-        this.administrator = administrators.getFirst();
+        this.administrator = administrators.stream().filter(Administrator::isEnable).findFirst().orElse(null);
     }
 
     public AgreementState getAgreementState() {
-        return agreementStates.getFirst();
+        return agreementStates.stream().filter(AgreementState::isEnable).findFirst().orElse(null);
     }
 
     public void setAgreementState(AgreementState agreementState) {
-        this.agreementState = agreementStates.getFirst();
+        this.agreementState = agreementStates.stream().filter(AgreementState::isEnable).findFirst().orElse(null);
     }
 }

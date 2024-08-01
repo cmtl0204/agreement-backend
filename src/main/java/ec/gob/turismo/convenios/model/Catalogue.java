@@ -29,11 +29,6 @@ public class Catalogue {
     @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(name = "FK_CATALOGUE_CATALOGUE"))
     private Catalogue parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JsonIgnore
-    private List<Catalogue> children;
-
-
     @Column(length = 255, nullable = false)
     private String code;
 
@@ -49,5 +44,8 @@ public class Catalogue {
     private String type;
 
     private boolean required;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Catalogue> children;
 
 }

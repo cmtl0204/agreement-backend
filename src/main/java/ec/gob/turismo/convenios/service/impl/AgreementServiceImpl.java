@@ -1,16 +1,21 @@
 package ec.gob.turismo.convenios.service.impl;
 
-import ec.gob.turismo.convenios.model.*;
-import ec.gob.turismo.convenios.repo.*;
+import ec.gob.turismo.convenios.projection.IAgreementProjection;
+import ec.gob.turismo.convenios.model.Administrator;
+import ec.gob.turismo.convenios.model.Agreement;
+import ec.gob.turismo.convenios.model.AgreementState;
+import ec.gob.turismo.convenios.projection.IListAgreementProjection;
+import ec.gob.turismo.convenios.repo.IAdministratorRepo;
+import ec.gob.turismo.convenios.repo.IAgreementRepo;
+import ec.gob.turismo.convenios.repo.IAgreementStateRepo;
+import ec.gob.turismo.convenios.repo.IGenericRepo;
 import ec.gob.turismo.convenios.service.IAgreementService;
 import ec.gob.turismo.convenios.util.CatalogueEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,9 +25,6 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
     private final IAgreementRepo agreementRepo;
     private final IAdministratorRepo administratorRepo;
     private final IAgreementStateRepo agreementStateRepo;
-    private final IInternalInstitutionRepo internalInstitutionRepo;
-    private final IExternalInstitutionRepo externalInstitutionRepo;
-    private final AdministratorServiceImpl administratorServiceImpl;
 
     @Override
     protected IGenericRepo<Agreement, UUID> getRepo() {
@@ -48,7 +50,7 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
     }
 
     @Override
-    public List<Agreement> findNationalAgreementsByOrigin() {
+    public List<IListAgreementProjection> findNationalAgreementsByOrigin() {
         String type = CatalogueEnum.CatalogueType.AGREEMENTS_ORIGIN.toString();
         String code = CatalogueEnum.AgreementOrigin.NATIONAL.toString();
         return agreementRepo.findNationalAgreementsByOrigin(type, code);
