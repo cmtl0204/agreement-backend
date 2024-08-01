@@ -1,8 +1,8 @@
 package ec.gob.turismo.convenios.controller;
 
 import ec.gob.turismo.convenios.dto.AgreementDTO;
-import ec.gob.turismo.convenios.model.*;
-import ec.gob.turismo.convenios.projection.IListAgreementProjection;
+import ec.gob.turismo.convenios.model.Agreement;
+import ec.gob.turismo.convenios.projection.IAgreementProjection;
 import ec.gob.turismo.convenios.service.IAgreementService;
 import ec.gob.turismo.convenios.util.MapperUtil;
 import jakarta.validation.Valid;
@@ -28,22 +28,20 @@ public class AgreementController {
 
     private final MapperUtil mapperUtil;
 
-    @GetMapping("/national_agreement")
-    public ResponseEntity<List<IListAgreementProjection>> findNationalAgreementsByOrigin() {
+    @GetMapping("/national-agreements")
+    public ResponseEntity<List<IAgreementProjection>> findNationalAgreementsByOrigin() {
        return ResponseEntity.ok(service.findNationalAgreementsByOrigin());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AgreementDTO> findById(@PathVariable("id") UUID id) {
         Agreement obj = service.findById(id);
+
         return ResponseEntity.ok(mapperUtil.map(obj, AgreementDTO.class));
     }
 
     @GetMapping
     public ResponseEntity<List<Agreement>> findAll() {
-        //List<Agreement> listObj = service.find();
-        //List<ListAgreementDTO> listDto = mapper.map(listObj, new TypeToken<List<ListAgreementDTO>>(){}.getType());
-//        List<IAgreementDTO> listDto = service.find();
 
         return ResponseEntity.ok(service.find());
     }

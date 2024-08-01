@@ -59,7 +59,7 @@ public class Agreement {
     @Column(nullable = false)
     private Boolean isFinancing;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private Boolean isAddendum;
 
     @ManyToOne
@@ -103,18 +103,32 @@ public class Agreement {
     private List<Financing> financings;
 
     public Administrator getAdministrator() {
-        return administrators.stream().filter(Administrator::isEnable).findFirst().orElse(null);
+        if (administrators != null) {
+            return administrators.stream().filter(Administrator::isEnable).findFirst().orElse(null);
+        }else {
+            return new Administrator();
+        }
+
     }
 
     public void setAdministrator(Administrator administrator) {
-        this.administrator = administrators.stream().filter(Administrator::isEnable).findFirst().orElse(null);
-    }
+        if (administrators != null) {
+            this.administrator = administrators.stream().filter(Administrator::isEnable).findFirst().orElse(null);
+        }
+   }
 
     public AgreementState getAgreementState() {
-        return agreementStates.stream().filter(AgreementState::isEnable).findFirst().orElse(null);
+        if (agreementStates != null) {
+            return agreementStates.stream().filter(AgreementState::isEnable).findFirst().orElse(null);
+        }else {
+            return new AgreementState();
+        }
+
     }
 
     public void setAgreementState(AgreementState agreementState) {
-        this.agreementState = agreementStates.stream().filter(AgreementState::isEnable).findFirst().orElse(null);
+        if (agreementStates != null) {
+            this.agreementState = agreementStates.stream().filter(AgreementState::isEnable).findFirst().orElse(null);
+        }
     }
 }

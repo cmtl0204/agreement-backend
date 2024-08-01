@@ -1,10 +1,9 @@
 package ec.gob.turismo.convenios.service.impl;
 
-import ec.gob.turismo.convenios.projection.IAgreementProjection;
 import ec.gob.turismo.convenios.model.Administrator;
 import ec.gob.turismo.convenios.model.Agreement;
 import ec.gob.turismo.convenios.model.AgreementState;
-import ec.gob.turismo.convenios.projection.IListAgreementProjection;
+import ec.gob.turismo.convenios.projection.IAgreementProjection;
 import ec.gob.turismo.convenios.repo.IAdministratorRepo;
 import ec.gob.turismo.convenios.repo.IAgreementRepo;
 import ec.gob.turismo.convenios.repo.IAgreementStateRepo;
@@ -50,7 +49,7 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
     }
 
     @Override
-    public List<IListAgreementProjection> findNationalAgreementsByOrigin() {
+    public List<IAgreementProjection> findNationalAgreementsByOrigin() {
         String type = CatalogueEnum.CatalogueType.AGREEMENTS_ORIGIN.toString();
         String code = CatalogueEnum.AgreementOrigin.NATIONAL.toString();
         return agreementRepo.findNationalAgreementsByOrigin(type, code);

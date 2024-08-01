@@ -1,7 +1,6 @@
 package ec.gob.turismo.convenios.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import ec.gob.turismo.convenios.model.Catalogue;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

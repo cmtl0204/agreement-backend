@@ -1,11 +1,8 @@
 package ec.gob.turismo.convenios.service.impl;
 
-import ec.gob.turismo.convenios.model.Administrator;
 import ec.gob.turismo.convenios.model.ExternalInstitution;
-import ec.gob.turismo.convenios.repo.IAdministratorRepo;
 import ec.gob.turismo.convenios.repo.IExternalInstitutionRepo;
 import ec.gob.turismo.convenios.repo.IGenericRepo;
-import ec.gob.turismo.convenios.service.IAdministratorService;
 import ec.gob.turismo.convenios.service.IExternalInstitutionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

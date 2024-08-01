@@ -19,4 +19,8 @@ public interface IAgreementProjection {
 
     Boolean getIsFinancing();
 
+    IAdministratorProjection getAdministrator();
+
+    IAgreementStateProjection getAgreementState();
+
 }
