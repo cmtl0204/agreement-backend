@@ -22,7 +22,11 @@ public class AgreementState {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime registeredAt;
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean enable;
 
     @ManyToOne
     @JoinColumn(name = "agreement_id", nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT_AGREEMENT_STATE"))

@@ -1,16 +1,14 @@
 package ec.gob.turismo.convenios.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@Data
+//@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -30,11 +28,6 @@ public class Catalogue {
     @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(name = "FK_CATALOGUE_CATALOGUE"))
     private Catalogue parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JsonIgnore
-    private List<Catalogue> children;
-
-
     @Column(length = 255, nullable = false)
     private String code;
 
@@ -50,5 +43,8 @@ public class Catalogue {
     private String type;
 
     private boolean required;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Catalogue> children;
 
 }

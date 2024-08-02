@@ -8,9 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -65,12 +63,19 @@ public class AgreementDTO {
     private CatalogueDTO specialType;
 
     @NotNull
+    private Boolean isFinancing;
+
+    @NotNull
     @JsonManagedReference
     private AdministratorDTO administrator;
+
+    private List<AdministratorDTO> administrators;
 
     @NotNull
     @JsonManagedReference
     private AgreementStateDTO agreementState;
+
+    private List<AgreementStateDTO> agreementStates;
 
     @NotNull
     @JsonManagedReference
@@ -84,7 +89,6 @@ public class AgreementDTO {
     @JsonManagedReference
     private List<ObligationDTO> obligations;
 
-    @NotNull
     @JsonManagedReference
     private List<FinancingDTO> financings;
 

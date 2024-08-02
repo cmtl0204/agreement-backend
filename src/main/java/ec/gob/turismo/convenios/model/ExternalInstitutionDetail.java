@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -22,10 +21,10 @@ public class ExternalInstitutionDetail {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(length = 255)
+    @Column(nullable = false)
     private String position;
 
-    @Column(length = 255)
+    @Column(nullable = false)
     private String unit;
 
     @ManyToOne

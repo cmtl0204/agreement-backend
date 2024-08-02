@@ -24,12 +24,13 @@ public class Financing {
     @Column(nullable = false)
     private String institutionName;
 
+    @Column(nullable = false)
     private double budget;
 
     @Column(nullable = false)
     private String paymentMethod;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String source;
 
     @ManyToOne
