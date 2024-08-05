@@ -2,7 +2,6 @@ package ec.gob.turismo.convenios.repo;
 
 import ec.gob.turismo.convenios.model.Catalogue;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.UUID;

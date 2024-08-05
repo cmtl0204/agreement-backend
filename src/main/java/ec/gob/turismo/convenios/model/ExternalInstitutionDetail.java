@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -14,18 +13,21 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "obligation_types")
-public class ObligationType {
+@Table(name = "external_institution_details")
+public class ExternalInstitutionDetail {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne // Foreign key
-    @JoinColumn(name = "type_id", nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_OBLIGATION_TYPE"))
-    private Catalogue type;
+    @Column(nullable = false)
+    private String position;
 
-    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Obligation> obligations;
+    @Column(nullable = false)
+    private String unit;
+
+    @ManyToOne
+    @JoinColumn(name = "external_institution_id", nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT"))
+    private ExternalInstitution externalInstitution;
 }

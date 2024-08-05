@@ -25,23 +25,14 @@ public class ExternalInstitution {
     @Column(length = 255, nullable = false)
     private String name;
 
-    @Column(length = 255)
-    private String position;
-
-    @Column(length = 255)
-    private String unit;
-
     @ManyToOne
-    @JoinColumn(name = "agreement_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT_EXTERNAL_INSTITUTION"))
+    @JoinColumn(name = "agreement_id", nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT_EXTERNAL_INSTITUTION"))
     private Agreement agreement;
 
     @ManyToOne
     @JoinColumn(name = "person_type_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_EXTERNAL_INSTITUTION"))
     private Catalogue personType;
 
-    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InstitutionObligation> institutionObligations;
-
-    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Financing> financings;
+    @OneToMany(mappedBy = "externalInstitution", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExternalInstitutionDetail> externalInstitutionDetails;
 }

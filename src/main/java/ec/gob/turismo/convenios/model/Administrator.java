@@ -21,6 +21,9 @@ public class Administrator {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean enable;
+
     @ManyToOne
     @JoinColumn(name = "unit_id", nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_UNIT_ADMINISTRATOR"))
     private Catalogue unit;
@@ -34,7 +37,7 @@ public class Administrator {
     private Agreement agreement;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_USER_ADMINISTRATOR"))
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER_ADMINISTRATOR"))
     private User user;
 
 }

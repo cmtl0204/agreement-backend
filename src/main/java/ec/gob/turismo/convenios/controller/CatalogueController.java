@@ -27,10 +27,12 @@ public class CatalogueController {
     @GetMapping
     public ResponseEntity<List<CatalogueDTO>> findAll() {
         List<CatalogueDTO> list = service.findCatalogue().stream().map(this::convertToDto).toList();
+
         return ResponseEntity.ok(list);
     }
 
     private CatalogueDTO convertToDto(Catalogue obj) {
+
         return mapper.map(obj, CatalogueDTO.class);
     }
 

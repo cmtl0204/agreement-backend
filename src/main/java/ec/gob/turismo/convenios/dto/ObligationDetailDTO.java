@@ -1,5 +1,7 @@
 package ec.gob.turismo.convenios.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,24 +13,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class CatalogueDTO {
+public class ObligationDetailDTO {
 
     @EqualsAndHashCode.Include
     private UUID id;
 
-    private boolean enabled;
+   @NotNull
+   private String description;
 
-    private CatalogueDTO parent;
-
-    private String code;
-
-    private String description;
-
-    private String name;
-
-    private Integer sort;
-
-    private String type;
-
-    private boolean required;
+    @JsonBackReference
+    private ObligationDTO obligation;
 }

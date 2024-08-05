@@ -1,6 +1,6 @@
 package ec.gob.turismo.convenios.dto;
 
-import ec.gob.turismo.convenios.model.Catalogue;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -35,7 +36,7 @@ public class AgreementDTO {
     private LocalDateTime startedAt;
 
     @NotNull
-    private boolean isFinishDate;
+    private Boolean isFinishDate;
 
     private LocalDateTime endedAt;
 
@@ -54,13 +55,41 @@ public class AgreementDTO {
     private String objective;
 
     @NotNull
-    private boolean isFinancing;
-
-    @NotNull
-    private boolean isAddendum;
-
     private CatalogueDTO origin;
 
+    @NotNull
     private CatalogueDTO type;
+
+    private CatalogueDTO specialType;
+
+    @NotNull
+    private Boolean isFinancing;
+
+    @NotNull
+    @JsonManagedReference
+    private AdministratorDTO administrator;
+
+    private List<AdministratorDTO> administrators;
+
+    @NotNull
+    @JsonManagedReference
+    private AgreementStateDTO agreementState;
+
+    private List<AgreementStateDTO> agreementStates;
+
+    @NotNull
+    @JsonManagedReference
+    private List<InternalInstitutionDTO> internalInstitutions;
+
+    @NotNull
+    @JsonManagedReference
+    private List<ExternalInstitutionDTO> externalInstitutions;
+
+    @NotNull
+    @JsonManagedReference
+    private List<ObligationDTO> obligations;
+
+    @JsonManagedReference
+    private List<FinancingDTO> financings;
 
 }

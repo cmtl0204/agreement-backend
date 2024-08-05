@@ -1,15 +1,14 @@
 package ec.gob.turismo.convenios.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@Data
+//@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -22,28 +21,18 @@ public class InternalInstitution {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "position_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_POSITION"))
-    private Catalogue position;
-
-    @ManyToOne
-    @JoinColumn(name = "unit_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_UNIT"))
-    private Catalogue unit;
 
     @ManyToOne
     @JoinColumn(name = "person_type_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_PERSON_TYPE"))
     private Catalogue personType;
 
     @ManyToOne
-    @JoinColumn(name = "agreement_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT"))
+    @JoinColumn(name = "agreement_id", nullable = false, foreignKey = @ForeignKey(name = "FK_AGREEMENT"))
     private Agreement agreement;
 
-    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InstitutionObligation> institutionObligations;
+    @OneToMany(mappedBy = "internalInstitution", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InternalInstitutionDetail> internalInstitutionDetails;
 
-    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Financing> financings;
 }
