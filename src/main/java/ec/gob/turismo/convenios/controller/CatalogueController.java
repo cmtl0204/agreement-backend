@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/catalogue")
+@RequestMapping("/catalogues")
 @RequiredArgsConstructor
 public class CatalogueController {
 

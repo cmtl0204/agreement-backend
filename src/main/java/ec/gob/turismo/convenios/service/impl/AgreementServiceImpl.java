@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,10 +40,13 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
 
         Administrator administrator = agreement.getAdministrator();
         administrator.setAgreement(agreement);
+        administrator.setEnabled(true);
         administratorRepo.save(administrator);
 
         AgreementState agreementState = agreement.getAgreementState();
         agreementState.setAgreement(agreement);
+        agreementState.setEnabled(true);
+        agreementState.setRegisteredAt(LocalDateTime.now());
         agreementStateRepo.save(agreementState);
 
         return agreement;

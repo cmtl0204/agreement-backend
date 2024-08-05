@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "files")
-public class File {
+public class MyFile {
 
     @Id
     @EqualsAndHashCode.Include
