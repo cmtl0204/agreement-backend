@@ -1,6 +1,7 @@
 package ec.gob.turismo.convenios.dto;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import ec.gob.turismo.convenios.model.MyFile;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -69,13 +70,9 @@ public class AgreementDTO {
     @JsonManagedReference
     private AdministratorDTO administrator;
 
-    private List<AdministratorDTO> administrators;
-
     @NotNull
     @JsonManagedReference
     private AgreementStateDTO agreementState;
-
-    private List<AgreementStateDTO> agreementStates;
 
     @NotNull
     @JsonManagedReference
@@ -91,5 +88,7 @@ public class AgreementDTO {
 
     @JsonManagedReference
     private List<FinancingDTO> financings;
+
+    private List<MyFile> files;
 
 }

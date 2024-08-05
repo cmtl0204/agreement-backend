@@ -59,7 +59,6 @@ public class Agreement {
     @Column(nullable = false)
     private Boolean isFinancing;
 
-    //@Column(nullable = false)
     private Boolean isAddendum;
 
     @ManyToOne
@@ -102,33 +101,40 @@ public class Agreement {
     @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Financing> financings;
 
+    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MyFile> files;
+
     public Administrator getAdministrator() {
         if (administrators != null) {
-            return administrators.stream().filter(Administrator::isEnable).findFirst().orElse(null);
+            return administrators.stream().filter(Administrator::getEnabled).findFirst().orElse(null);
         }else {
-            return new Administrator();
+            return this.administrator;
         }
 
     }
 
     public void setAdministrator(Administrator administrator) {
         if (administrators != null) {
-            this.administrator = administrators.stream().filter(Administrator::isEnable).findFirst().orElse(null);
+            this.administrator = administrators.stream().filter(Administrator::getEnabled).findFirst().orElse(null);
+        }else {
+            this.administrator = administrator;
         }
    }
 
     public AgreementState getAgreementState() {
         if (agreementStates != null) {
-            return agreementStates.stream().filter(AgreementState::isEnable).findFirst().orElse(null);
+            return agreementStates.stream().filter(AgreementState::getEnabled).findFirst().orElse(null);
         }else {
-            return new AgreementState();
+            return this.agreementState;
         }
 
     }
 
     public void setAgreementState(AgreementState agreementState) {
         if (agreementStates != null) {
-            this.agreementState = agreementStates.stream().filter(AgreementState::isEnable).findFirst().orElse(null);
+            this.agreementState = agreementStates.stream().filter(AgreementState::getEnabled).findFirst().orElse(null);
+        }else {
+            this.agreementState = agreementState;
         }
     }
 }
