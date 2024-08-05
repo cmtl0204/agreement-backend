@@ -1,4 +1,4 @@
-package com.mitocode.model;
+package ec.gob.turismo.convenios.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

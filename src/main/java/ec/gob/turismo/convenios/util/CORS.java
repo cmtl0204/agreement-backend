@@ -1,4 +1,4 @@
-package com.mitocode.util;
+package ec.gob.turismo.convenios.util;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
