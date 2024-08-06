@@ -23,11 +23,13 @@ public class AgreementController {
 
     private final MapperUtil mapperUtil;
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/national-agreements")
     public ResponseEntity<List<IAgreementProjection>> findNationalAgreementsByOrigin() {
        return ResponseEntity.ok(service.findNationalAgreementsByOrigin());
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public ResponseEntity<AgreementDTO> findById(@PathVariable("id") UUID id) {
         Agreement obj = service.findById(id);
@@ -35,12 +37,14 @@ public class AgreementController {
         return ResponseEntity.ok(mapperUtil.map(obj, AgreementDTO.class));
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping
     public ResponseEntity<List<Agreement>> findAll() {
 
         return ResponseEntity.ok(service.find());
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<AgreementDTO> save(@Valid @RequestBody AgreementDTO dto) {
         Agreement agreement = mapperUtil.map(dto, Agreement.class);
