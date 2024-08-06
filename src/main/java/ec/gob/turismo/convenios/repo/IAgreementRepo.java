@@ -14,14 +14,14 @@ public interface IAgreementRepo<T, ID> extends IGenericRepo<Agreement, UUID> {
     @Query("SELECT a as agreement " +
             "FROM Agreement a LEFT JOIN Administrator ad on a.id = ad.agreement.id  LEFT JOIN AgreementState st on a.id = st.agreement.id " +
             "WHERE a.origin.type = :type AND a.origin.code = :code " +
-            "AND ad.enable = true AND st.enable = true ")
+            "AND ad.enabled = true AND st.enabled = true ")
     List<Agreement> find(@Param("type") String type, @Param("code") String code);
 
     @Query("SELECT ad as administrator, st as agreementState, a.id as id, a.name as name, a.endedAt as endedAt, " +
             "a.number as number, a.internalNumber as internalNumber, a.subscribedAt as subscribedAt,  a.isFinancing as isFinancing " +
             "FROM Agreement a LEFT JOIN Administrator ad on a.id = ad.agreement.id  LEFT JOIN AgreementState st on a.id = st.agreement.id " +
             "WHERE a.origin.type = :type AND a.origin.code = :code " +
-            "AND ad.enable = true AND st.enable = true ")
+            "AND ad.enabled = true AND st.enabled = true ")
     List<IAgreementProjection> findNationalAgreementsByOrigin(@Param("type") String type, @Param("code") String code);
 
 
