@@ -25,7 +25,7 @@ public class InternalInstitutionDetail {
     private Catalogue position;
 
     @ManyToOne
-    @JoinColumn(name = "unit_id",  nullable = false, foreignKey = @ForeignKey(name = "FK_CATALOGUE_UNIT"))
+    @JoinColumn(name = "unit_id",  foreignKey = @ForeignKey(name = "FK_CATALOGUE_UNIT"))
     private Catalogue unit;
 
     @ManyToOne

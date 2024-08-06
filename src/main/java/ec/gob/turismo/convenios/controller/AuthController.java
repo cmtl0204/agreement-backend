@@ -1,13 +1,8 @@
 package ec.gob.turismo.convenios.controller;
 
-import ec.gob.turismo.convenios.dto.CatalogueDTO;
-import ec.gob.turismo.convenios.model.Catalogue;
 import ec.gob.turismo.convenios.model.User;
-import ec.gob.turismo.convenios.service.ICatalogueService;
 import ec.gob.turismo.convenios.service.IUserService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +13,9 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
-public class LoginController {
+public class AuthController {
 
     private final IUserService service;
 

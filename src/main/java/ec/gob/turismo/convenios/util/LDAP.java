@@ -14,72 +14,66 @@ import java.util.List;
 
 public class LDAP {
 	
-	String connectionString = "ldap://192.168.20.102:389";
-	String baseDN = "ou=people,dc=turismo,dc=gob,dc=ec";
-	String findString = "uid=zimbra,cn=admins,cn=zimbra";
-	String password = "g5KKKzA5i";
+//	String connectionString = "ldap://192.168.20.102:389";
+//	String baseDN = "ou=people,dc=turismo,dc=gob,dc=ec";
+//	String findString = "uid=zimbra,cn=admins,cn=zimbra";
+//	String password = "g5KKKzA5i";
 
-	/*public int autenticarLdap(String username, String password){
+	/*public int authLDAP(String username, String passwordUser) throws Exception{
 		int valido = 0;
 		Hashtable<String,String> ldapEnv = new Hashtable<String,String>();
-		String findString = "uid=zimbra,cn=admins,cn=zimbra";
-		String findPassword = "g5KKKzA5i";
 		ldapEnv.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
 		ldapEnv.put(Context.SECURITY_AUTHENTICATION, "simple");
 		ldapEnv.put(Context.SECURITY_PRINCIPAL, findString);
-		ldapEnv.put(Context.SECURITY_CREDENTIALS, findPassword);
+		ldapEnv.put(Context.SECURITY_CREDENTIALS, password);
 		ldapEnv.put(Context.PROVIDER_URL, connectionString);
-		try {
-			//CONEXION CON EL LDAP
-			DirContext ctx;
-			ctx = new InitialLdapContext(ldapEnv, null);
-			SearchControls searchCtls = new SearchControls();
-			//ITEMS A TRAER EN EL CASO QUE LO NECESITEMOS
-			String returnedAtts[] = { "uid","sn","givenName","mail"};
-			searchCtls.setReturningAttributes(returnedAtts);
-			searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);
-			String searchFilter = "(uid="+username.toLowerCase()+")";
-			NamingEnumeration<SearchResult> results = ctx.search(baseDN, searchFilter, searchCtls);
-			while (results.hasMoreElements()){
-				SearchResult searchResult = (SearchResult) results.next();
-				Attributes attrs = searchResult.getAttributes();
-				//OPTENEMOS LA UNIDAD ORGANIZATIVA DEL UID BUSCADO CON SU UID Y LO COMPLETAMOS CON LA BASE
-				String dn = searchResult.getName()+","+baseDN;
-				if (attrs != null){
-					//EL UID EXISTE AHORA VALIDAR PASSWORD
-					valido = validarAuth(dn,password);
-					//SI VALIDO ES "0" PASSWORD INCORRECTO, SI ES "1" PASSWORD CORRECTO
-				}
+
+		//CONEXION CON EL LDAP
+		DirContext ctx = new InitialLdapContext(ldapEnv, null);
+		SearchControls searchCtls = new SearchControls();
+		String returnedAtts[] = { "uid","sn","givenName","mail"};
+		searchCtls.setReturningAttributes(returnedAtts);
+		searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+		String searchFilter = "(uid="+username.toLowerCase()+")";
+		NamingEnumeration<SearchResult> results = ctx.search(baseDN, searchFilter, searchCtls);
+		while (results.hasMoreElements()){
+			SearchResult searchResult = (SearchResult) results.next();
+			Attributes attrs = searchResult.getAttributes();
+			//OPTENEMOS LA UNIDAD ORGANIZATIVA DEL UID BUSCADO CON SU UID Y LO COMPLETAMOS CON LA BASE
+			String dn = searchResult.getName()+","+baseDN;
+			if (attrs != null){
+				//EL UID EXISTE AHORA VALIDAR PASSWORD
+				//valido = validationAuth(dn,passwordUser);
+				//SI VALIDO ES "0" PASSWORD INCORRECTO, SI ES "1" PASSWORD CORRECTO
 			}
-			ctx.close();
-		} catch (NamingException e) {
-			e.printStackTrace();
 		}
+		ctx.close();
+
 		//RETORNAMOS EL VALOR A QUIEN LO LLAMO SIENDO POR DEFECTO "0" EN EL CASO DE QUE EL UID NO EXISTA O PASSWORD INVALIDO
 		return valido;
 	}
-
-	private int validarAuth(String dn,String password){
+*/
+	public int validationAuth(String connectionLdap, String dnLdap, String userName,String userPass) throws Exception{
 		int valido = 0;
-		Hashtable<String,String> env = new Hashtable<String,String>();
-		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-		env.put(Context.SECURITY_AUTHENTICATION, "simple");
-		env.put(Context.SECURITY_PRINCIPAL, dn);
-		env.put(Context.SECURITY_CREDENTIALS, password);
-		env.put(Context.PROVIDER_URL, connectionString);
-		DirContext ctx1;
+		String uid = "uid="+userName.toLowerCase()+",";
 		try {
-			ctx1 = new InitialLdapContext(env, null);
+			Hashtable<String,String> env = new Hashtable<String,String>();
+			env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+			env.put(Context.SECURITY_AUTHENTICATION, "simple");
+			env.put(Context.SECURITY_PRINCIPAL, uid+dnLdap);
+			env.put(Context.SECURITY_CREDENTIALS, userPass);
+			env.put(Context.PROVIDER_URL, connectionLdap);
+			DirContext ctx = new InitialLdapContext(env, null);
 			valido = 1;
-			ctx1.close();
-		} catch (NamingException e) {
-			//e.printStackTrace();
+			ctx.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 			valido = 0;
 		}
 		return valido;
-	}*/
+	}
 
-	public List<User> buscarUsuariosLdap() throws  Exception{
+	public List<User> findUserLDAP(String connectionLdap, String dnLdap, String findLdap, String passLdap) throws  Exception{
 
 		String accountName = "*";
 		String searchFilter = "(userid="+accountName+")";
@@ -95,14 +89,14 @@ public class LDAP {
 
 		Hashtable<String, String> ldapEnv = new Hashtable<String,String>();
 		ldapEnv.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-		ldapEnv.put(Context.PROVIDER_URL, connectionString);
+		ldapEnv.put(Context.PROVIDER_URL, connectionLdap);
 		ldapEnv.put(Context.SECURITY_AUTHENTICATION, "simple");
-		ldapEnv.put(Context.SECURITY_PRINCIPAL, findString);
-		ldapEnv.put(Context.SECURITY_CREDENTIALS, password);
+		ldapEnv.put(Context.SECURITY_PRINCIPAL, findLdap);
+		ldapEnv.put(Context.SECURITY_CREDENTIALS, passLdap);
 		ldapEnv.put(LdapContext.CONTROL_FACTORIES, "com.sun.jndi.ControlFactory");
 		ldapEnv.put("java.naming.ldap.attributes.binary", "objectSID");
 		InitialDirContext ldapCtx = new InitialDirContext(ldapEnv);
-		NamingEnumeration<SearchResult> results = ldapCtx.search(baseDN, searchFilter, ldapCtls);
+		NamingEnumeration<SearchResult> results = ldapCtx.search(dnLdap, searchFilter, ldapCtls);
 
 		int i=0;
 		if(results.hasMoreElements()) {

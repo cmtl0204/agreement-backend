@@ -10,4 +10,11 @@ public class ParameterEnum {
         FILE_DIRECTORY,
     }
 
+    public enum Ldap{
+        LDAP_CONNECTION,
+        LDAP_DN,
+        LDAP_FIND,
+        LDAP_PASS
+    }
+
 }
