@@ -44,13 +44,10 @@ public class Agreement {
 
     private String endedReason;
 
-    @Column(nullable = false)
     private Integer yearTerm;
 
-    @Column(nullable = false)
     private Integer monthTerm;
 
-    @Column(nullable = false)
     private Integer dayTerm;
 
     @Column(nullable = false)

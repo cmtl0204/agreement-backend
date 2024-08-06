@@ -1,6 +1,7 @@
 package ec.gob.turismo.convenios.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,21 +14,21 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class AdministratorDTO {
+public class UserDTO {
 
     @EqualsAndHashCode.Include
     private UUID id;
 
     @NotNull
-    private CatalogueDTO unit;
+    private String username;
 
     @NotNull
-    private CatalogueDTO position;
-
-    @JsonBackReference
-    private AgreementDTO agreement;
+    private String email;
 
     @NotNull
-    private UserDTO user;
+    private String name;
+
+    @NotNull
+    private String lastname;
 
  }

@@ -23,6 +23,7 @@ public class AgreementController {
 
     private final MapperUtil mapperUtil;
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/national-agreements")
     public ResponseEntity<List<IAgreementProjection>> findNationalAgreementsByOrigin() {
        return ResponseEntity.ok(service.findNationalAgreementsByOrigin());

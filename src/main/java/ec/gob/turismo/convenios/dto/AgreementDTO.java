@@ -43,13 +43,10 @@ public class AgreementDTO {
 
     private String endedReason;
 
-    @NotNull
     private Integer yearTerm;
 
-    @NotNull
     private Integer monthTerm;
 
-    @NotNull
     private Integer dayTerm;
 
     @NotNull
