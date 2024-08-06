@@ -140,10 +140,10 @@ public class LDAP {
 						}
 
 						if(!NombreSalida[1].isEmpty()){
-							usuario.setUserName(usernameSalida[1].trim());
+							usuario.setUsername(usernameSalida[1].trim());
 							usuario.setEmail(mailSalida[0].trim());
 							usuario.setName(NombreSalida[1].trim());
-							usuario.setLastName(ApellidoSalida[1].trim());
+							usuario.setLastname(ApellidoSalida[1].trim());
 							listaUserLdap.add(usuario);
 						}
 						i++;
