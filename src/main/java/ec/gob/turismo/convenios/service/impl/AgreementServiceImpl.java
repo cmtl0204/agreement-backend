@@ -3,6 +3,7 @@ package ec.gob.turismo.convenios.service.impl;
 import ec.gob.turismo.convenios.model.Administrator;
 import ec.gob.turismo.convenios.model.Agreement;
 import ec.gob.turismo.convenios.model.AgreementState;
+import ec.gob.turismo.convenios.model.User;
 import ec.gob.turismo.convenios.projection.IAgreementProjection;
 import ec.gob.turismo.convenios.repo.IAdministratorRepo;
 import ec.gob.turismo.convenios.repo.IAgreementRepo;
@@ -39,6 +40,10 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
         agreementRepo.save(agreement);
 
         Administrator administrator = agreement.getAdministrator();
+
+        User user = administrator.getUser();
+
+
         administrator.setAgreement(agreement);
         administrator.setEnabled(true);
         administratorRepo.save(administrator);

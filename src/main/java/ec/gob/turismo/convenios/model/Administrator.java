@@ -37,7 +37,7 @@ public class Administrator {
     private Agreement agreement;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER_ADMINISTRATOR"))
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_USER_ADMINISTRATOR"))
     private User user;
 
 }

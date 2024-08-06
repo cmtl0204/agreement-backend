@@ -22,7 +22,7 @@ public class User {
     private UUID id;
 
     @Column(nullable = false, unique = true)
-    private String userName;
+    private String username;
 
     @Column(nullable = false, length = 60) //123 | Bcrypt
     private String password;
@@ -37,7 +37,7 @@ public class User {
     private String name;
 
     @Column(nullable = false)
-    private String lastName;
+    private String lastname;
 
 
 }
