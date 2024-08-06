@@ -21,13 +21,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false, length = 60, unique = true)
-    private String username;
+    @Column(nullable = false, unique = true)
+    private String userName;
 
     @Column(nullable = false, length = 60) //123 | Bcrypt
     private String password;
 
     @Column(nullable = false)
     private boolean enabled;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String lastName;
+
 
 }
