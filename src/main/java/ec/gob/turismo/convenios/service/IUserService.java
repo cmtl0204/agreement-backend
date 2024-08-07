@@ -10,6 +10,10 @@ public interface IUserService extends ICRUD<User, UUID> {
 
     List<User> findUserLDAP() throws Exception;
 
+    User findUserByEmail(String email);
+
+    int authLDAP(String username, String password) throws Exception;
+
 
 
 }

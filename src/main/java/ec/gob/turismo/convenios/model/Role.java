@@ -6,21 +6,24 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(name = "roles")
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @EqualsAndHashCode.Include
-    private Integer idRole;
+    private UUID id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
+    private String code;
+
+    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false, length = 100)
-    private String description;
 }

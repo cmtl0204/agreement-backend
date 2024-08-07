@@ -3,6 +3,7 @@ package ec.gob.turismo.convenios.util;
 
 import ec.gob.turismo.convenios.model.User;
 
+import javax.naming.AuthenticationException;
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.*;
@@ -53,7 +54,7 @@ public class LDAP {
 		return valido;
 	}
 */
-	public int validationAuth(String connectionLdap, String dnLdap, String userName,String userPass) throws Exception{
+	public int validationAuth(String connectionLdap, String dnLdap, String userName,String userPass) throws AuthenticationException {
 		int valido = 0;
 		String uid = "uid="+userName.toLowerCase()+",";
 		try {
@@ -67,8 +68,8 @@ public class LDAP {
 			valido = 1;
 			ctx.close();
 		} catch (Exception e) {
-			e.printStackTrace();
 			valido = 0;
+			throw new AuthenticationException(e.getMessage());
 		}
 		return valido;
 	}
