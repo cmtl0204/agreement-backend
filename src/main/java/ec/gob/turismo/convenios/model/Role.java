@@ -21,9 +21,9 @@ public class Role {
     @EqualsAndHashCode.Include
     private UUID id;
 
-    @Column(nullable = false, length = 50)
-    private String name;
+    @Column(nullable = false)
+    private String code;
 
-    @Column(nullable = false, length = 100)
-    private String description;
+    @Column(nullable = false)
+    private String name;
 }
