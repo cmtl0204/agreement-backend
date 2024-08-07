@@ -5,10 +5,7 @@ import ec.gob.turismo.convenios.model.Agreement;
 import ec.gob.turismo.convenios.model.AgreementState;
 import ec.gob.turismo.convenios.model.User;
 import ec.gob.turismo.convenios.projection.IAgreementProjection;
-import ec.gob.turismo.convenios.repo.IAdministratorRepo;
-import ec.gob.turismo.convenios.repo.IAgreementRepo;
-import ec.gob.turismo.convenios.repo.IAgreementStateRepo;
-import ec.gob.turismo.convenios.repo.IGenericRepo;
+import ec.gob.turismo.convenios.repo.*;
 import ec.gob.turismo.convenios.service.IAgreementService;
 import ec.gob.turismo.convenios.util.CatalogueEnum;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +23,7 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
     private final IAgreementRepo agreementRepo;
     private final IAdministratorRepo administratorRepo;
     private final IAgreementStateRepo agreementStateRepo;
+    private final IUserRepo userRepo;
 
     @Override
     protected IGenericRepo<Agreement, UUID> getRepo() {
@@ -42,7 +40,12 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
         Administrator administrator = agreement.getAdministrator();
 
         User user = administrator.getUser();
-
+        User userBdd = userRepo.findUserByEmail(user.getEmail());
+        if (userBdd == null) {
+            userRepo.save(user);
+        }else {
+            administrator.setUser(userBdd);
+        }
 
         administrator.setAgreement(agreement);
         administrator.setEnabled(true);
