@@ -22,10 +22,21 @@ public class UserServiceImpl extends CRUDImpl<User, UUID> implements IUserServic
     private final IUserRepo userRepo;
     private final IParameterRepo parameterRepo;
 
+
     @Override
     protected IGenericRepo<User, UUID> getRepo() {
 
         return userRepo;
+    }
+
+//    private final Parameter connectionLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_CONNECTION.toString());
+//    private final Parameter dnLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_DN.toString());
+//    private final Parameter findLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_FIND.toString());
+//    private final Parameter passLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_PASS.toString());
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepo.findUserByEmail(email);
     }
 
     @Override
@@ -35,10 +46,18 @@ public class UserServiceImpl extends CRUDImpl<User, UUID> implements IUserServic
         Parameter dnLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_DN.toString());
         Parameter findLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_FIND.toString());
         Parameter passLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_PASS.toString());
-
         LDAP ldap = new LDAP();
-        //int valido = ldap.validationAuth(connectionLdap.getValue(), dnLdap.getValue(),"judith.paredes","44orejas");
 
         return ldap.findUserLDAP(connectionLdap.getValue(), dnLdap.getValue(), findLdap.getValue(), passLdap.getValue());
+    }
+
+    @Override
+    public int authLDAP(String username, String password) throws Exception {
+        Parameter connectionLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_CONNECTION.toString());
+        Parameter dnLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_DN.toString());
+        Parameter findLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_FIND.toString());
+        Parameter passLdap = parameterRepo.findParameterByName(ParameterEnum.Ldap.LDAP_PASS.toString());
+        LDAP ldap = new LDAP();
+        return ldap.validationAuth(connectionLdap.getValue(), dnLdap.getValue(),username,password);
     }
 }

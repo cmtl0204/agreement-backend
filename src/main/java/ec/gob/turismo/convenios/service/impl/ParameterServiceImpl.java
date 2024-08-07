@@ -3,6 +3,7 @@ package ec.gob.turismo.convenios.service.impl;
 import ec.gob.turismo.convenios.model.Parameter;
 import ec.gob.turismo.convenios.repo.IGenericRepo;
 import ec.gob.turismo.convenios.repo.IParameterRepo;
+import ec.gob.turismo.convenios.service.IParameterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
