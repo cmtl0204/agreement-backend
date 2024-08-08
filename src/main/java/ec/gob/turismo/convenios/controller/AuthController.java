@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -45,16 +44,16 @@ public class AuthController {
         return ResponseEntity.ok(list);
     }
 
-
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest req) throws Exception {
 
-        int auth = service.authLDAP(req.getUsername(), req.getPassword());
-        if (auth == 0) {
-            CustomErrorResponse err = new CustomErrorResponse("", "", "");
-            throw new Exception("INVALID_CREDENTIALS");
-        }
+//        int auth = service.authLDAP(req.getUsername(), req.getPassword());
+
+//        if (auth == 0) {
+//            CustomErrorResponse err = new CustomErrorResponse("", "", "");
+//            throw new Exception("INVALID_CREDENTIALS");
+//        }
 
         final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(req.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
