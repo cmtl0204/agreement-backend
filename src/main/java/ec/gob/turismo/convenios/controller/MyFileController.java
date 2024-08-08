@@ -1,10 +1,14 @@
 package ec.gob.turismo.convenios.controller;
 
+import ec.gob.turismo.convenios.config.ResponseResult;
+import ec.gob.turismo.convenios.dto.AgreementDTO;
 import ec.gob.turismo.convenios.dto.MyFileDTO;
+import ec.gob.turismo.convenios.model.Agreement;
 import ec.gob.turismo.convenios.model.MyFile;
 import ec.gob.turismo.convenios.service.IMyFileService;
 import ec.gob.turismo.convenios.util.MapperUtil;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.TypeToken;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +38,15 @@ public class MyFileController {
         return ResponseEntity.ok(mapperUtil.map(obj, MyFileDTO.class));
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("models/{id}")
+    public ResponseEntity<ResponseResult<List<MyFileDTO>>> findById(@PathVariable("id") UUID id) {
+        List<MyFile> obj = service.findFilesByModel(id);
+        List<MyFileDTO> dto = mapperUtil.mapList(obj, MyFileDTO.class);
+        ResponseResult<List<MyFileDTO>> list = ResponseResult.success(dto);
+
+        return ResponseEntity.ok(list);
+    }
 
 
 

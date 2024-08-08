@@ -83,4 +83,9 @@ public class MyFileServiceImpl extends CRUDImpl<MyFile, UUID> implements IMyFile
         return new MyFile();
     }
 
+    @Override
+    public List<MyFile> findFilesByModel(UUID modelId) {
+        return fileRepo.findMyFileByModelId(modelId);
+    }
+
 }

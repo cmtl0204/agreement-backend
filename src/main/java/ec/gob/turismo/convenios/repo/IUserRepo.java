@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public interface IUserRepo<T, ID> extends IGenericRepo<User, UUID> {
 
+    @Query("FROM User u WHERE u.username = :username AND u.enabled")
     User findOneByUsername(String username);
 
     @Query("FROM User u WHERE u.email = :email AND u.enabled")
