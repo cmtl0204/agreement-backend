@@ -31,9 +31,9 @@ public class MyFileController {
     public ResponseEntity<MyFileDTO> saveFile(
             @PathVariable("id") UUID modelId,
             @RequestParam("files") List<MultipartFile> files,
-            @RequestParam("typeId") UUID typeId) throws Exception {
+            @RequestParam("typeIds") List<UUID> typeIds) throws Exception {
 
-        MyFile obj = service.createFile(modelId, typeId, files);
+        MyFile obj = service.createFile(modelId, typeIds, files);
 
         return ResponseEntity.ok(mapperUtil.map(obj, MyFileDTO.class));
     }
@@ -47,7 +47,6 @@ public class MyFileController {
 
         return ResponseEntity.ok(list);
     }
-
 
 
 }

@@ -1,5 +1,6 @@
 package ec.gob.turismo.convenios.service.impl;
 
+import ec.gob.turismo.convenios.model.Catalogue;
 import ec.gob.turismo.convenios.model.MyFile;
 import ec.gob.turismo.convenios.model.Parameter;
 import ec.gob.turismo.convenios.repo.IAgreementRepo;
@@ -37,7 +38,7 @@ public class MyFileServiceImpl extends CRUDImpl<MyFile, UUID> implements IMyFile
 
     @Transactional
     @Override
-    public MyFile createFile(UUID modelId, UUID typeId, List<MultipartFile> files) throws Exception {
+    public MyFile createFile(UUID modelId, List<UUID> typeIds, List<MultipartFile> files) throws Exception {
 
         String pathRelative = "";
         Path path = null;
@@ -45,26 +46,29 @@ public class MyFileServiceImpl extends CRUDImpl<MyFile, UUID> implements IMyFile
         Parameter uploadDirParam = null;
         String UPLOAD_FOLDER = "";
         String directory = parameterRepo.findParameterByName(ParameterEnum.FilePath.FILE_DIRECTORY.toString()).getValue();
-        if(Util.isWindows()){
+        if (Util.isWindows()) {
             uploadDirParam = parameterRepo.findParameterByName(ParameterEnum.FilePath.UPLOAD_DIR_WINDOWS.toString());
-            UPLOAD_FOLDER = uploadDirParam.getValue() + File.separator + File.separator +directory+File.separator+File.separator+modelId;
+            UPLOAD_FOLDER = uploadDirParam.getValue() + File.separator + File.separator + directory + File.separator + File.separator + modelId;
             Util.createFolderIfNotExists(UPLOAD_FOLDER);
-            UPLOAD_FOLDER = UPLOAD_FOLDER+ File.separator+ File.separator;
-            path = Paths.get(uploadDirParam.getValue() + File.separator + File.separator+directory);
-        }else {
+            UPLOAD_FOLDER = UPLOAD_FOLDER + File.separator + File.separator;
+            path = Paths.get(uploadDirParam.getValue() + File.separator + File.separator + directory);
+        } else {
             uploadDirParam = parameterRepo.findParameterByName(ParameterEnum.FilePath.UPLOAD_DIR_LINUX.toString());
-            UPLOAD_FOLDER = uploadDirParam.getValue() + File.separator +directory+File.separator+modelId;
+            UPLOAD_FOLDER = uploadDirParam.getValue() + File.separator + directory + File.separator + modelId;
             Util.createFolderIfNotExists(UPLOAD_FOLDER);
-            UPLOAD_FOLDER = UPLOAD_FOLDER+ File.separator;
-            path = Paths.get(uploadDirParam.getValue() + File.separator+directory);
+            UPLOAD_FOLDER = UPLOAD_FOLDER + File.separator;
+            path = Paths.get(uploadDirParam.getValue() + File.separator + directory);
 
         }
 
         absolute = Paths.get(UPLOAD_FOLDER);
         pathRelative = String.valueOf(path.relativize(absolute));
 
-        for (MultipartFile f : files) {
-            File file = Util.convertToFile(f);
+        for (int i = 0; i < files.size(); i++) {
+            File file = Util.convertToFile(files.get(i));
+            Catalogue type = new Catalogue();
+            type.setId(typeIds.get(i));
+
             String fileName = Util.slugify(file.getName());
             String extension = Util.extension(fileName);
             MyFile newFile = new MyFile();
@@ -73,6 +77,7 @@ public class MyFileServiceImpl extends CRUDImpl<MyFile, UUID> implements IMyFile
             newFile.setExtension(extension);
             newFile.setPath(pathRelative);
             newFile.setSize(file.length());
+            newFile.setType(type);
             fileRepo.save(newFile);
 
             String uploadedFileLocation = UPLOAD_FOLDER + newFile.getId() + "." + extension;
