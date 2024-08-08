@@ -42,6 +42,8 @@ public class AgreementServiceImpl extends CRUDImpl<Agreement, UUID> implements I
         User user = administrator.getUser();
         User userBdd = userRepo.findUserByEmail(user.getEmail());
         if (userBdd == null) {
+            user.setEnabled(true);
+            user.setPassword(user.getUsername());
             userRepo.save(user);
         }else {
             administrator.setUser(userBdd);

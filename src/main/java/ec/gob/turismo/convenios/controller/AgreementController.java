@@ -1,5 +1,6 @@
 package ec.gob.turismo.convenios.controller;
 
+import ec.gob.turismo.convenios.config.ResponseResult;
 import ec.gob.turismo.convenios.dto.AgreementDTO;
 import ec.gob.turismo.convenios.model.Agreement;
 import ec.gob.turismo.convenios.projection.IAgreementProjection;
@@ -25,8 +26,12 @@ public class AgreementController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/national-agreements")
-    public ResponseEntity<List<IAgreementProjection>> findNationalAgreementsByOrigin() {
-       return ResponseEntity.ok(service.findNationalAgreementsByOrigin());
+    //public ResponseEntity<List<IAgreementProjection>> findNationalAgreementsByOrigin() {
+    public ResponseEntity<ResponseResult<List<IAgreementProjection>>> findNationalAgreementsByOrigin() {
+
+//       return ResponseEntity.ok(service.findNationalAgreementsByOrigin());
+        ResponseResult<List<IAgreementProjection>> resul = ResponseResult.success( service.findNationalAgreementsByOrigin());
+        return ResponseEntity.ok(resul);
     }
 
     @CrossOrigin(origins = "*")
