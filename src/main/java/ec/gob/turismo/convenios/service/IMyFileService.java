@@ -10,7 +10,7 @@ public interface IMyFileService extends ICRUD<MyFile, UUID> {
 
 
     MyFile createFile(UUID modelId, UUID typeId, List<MultipartFile> files) throws Exception;
-
+    List<MyFile> findFilesByModel(UUID modelId);
 
 
 }

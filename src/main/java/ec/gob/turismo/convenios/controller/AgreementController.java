@@ -51,11 +51,14 @@ public class AgreementController {
 
     @CrossOrigin(origins = "*")
     @PostMapping
-    public ResponseEntity<AgreementDTO> save(@Valid @RequestBody AgreementDTO dto) {
+    //public ResponseEntity<AgreementDTO> save(@Valid @RequestBody AgreementDTO dto) {
+    public ResponseEntity<ResponseResult<AgreementDTO>> save(@Valid @RequestBody AgreementDTO dto) {
         Agreement agreement = mapperUtil.map(dto, Agreement.class);
         Agreement obj = service.createAgreement(agreement);
 
-        return ResponseEntity.ok(mapperUtil.map(obj, AgreementDTO.class));
+        //return ResponseEntity.ok(mapperUtil.map(obj, AgreementDTO.class));
+        ResponseResult<AgreementDTO> resul = ResponseResult.success(mapperUtil.map(obj, AgreementDTO.class));
+        return ResponseEntity.ok(resul);
     }
 
 
